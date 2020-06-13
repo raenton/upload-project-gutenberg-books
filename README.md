@@ -6,8 +6,8 @@ Please see `TASK.md` for the task requirements.
 
 Due to time limitations, there was only so far I could go with this. There is
 admittedly a lot that could be done to improve things. The data for one, would be
-better suited to a relation database. Authors and Subjects and so on should be separated
-into their own tables, rather than having a lot of repeated data in the documents. I chose to use mongo because of familiarity and quick setup, because I could not really afford to spend much more time on this.
+better suited to a relational database. Authors and Subjects and so on should be separated
+into their own tables, rather than having a lot of repeated data in the documents. I chose to use mongo because of familiarity and quick setup, because I could not really afford to spend much more time.
 
 There is not much context for the code either, so it is difficult to consider
 the architectural terms. The code would also take a different shape depending on the
