@@ -25,6 +25,9 @@ async function uploadBooks(rootFolder) {
       .filter(p => !isNaN(Number(p)))
       .map(p => path.resolve(rootFolder, p, `pg${p}.rdf`))
     
+    // books are process one at a time so as not to flood memory.
+    // in place of this, a mechanism could be set up so as to responsibly
+    // incur more promises.
     for (let bookPath of bookPaths) {
       const book = await bookService.readBook(bookPath)
       const exists = await bookModel.exists({
@@ -35,10 +38,14 @@ async function uploadBooks(rootFolder) {
         await bookModel.create(book)
       }
     }
-    mongoose.disconnect()
+    await mongoose.disconnect()
   } catch (err) {
-    console.error(err)
+    console.error('Something really bad happened', err)
   }
 }
 
-uploadBooks(booksDir)
+console.time()
+uploadBooks(booksDir).then(() => {
+  console.timeEnd()
+  process.stdout.write('[*** Done ***] You should now have around 60k records in your database\n')
+})
