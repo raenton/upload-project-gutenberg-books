@@ -5,8 +5,8 @@
   "scripts": {
     "dev": "nodemon --inspect=1234 index.js",
     "start": "node index.js",
-    "test": "mocha",
-    "test:watch": "mocha -w ./test/*.test.js",
+    "test": "mocha ./test/**/*.test.js",
+    "test:watch": "mocha -w ./test/**/*.test.js",
     "coverage": "nyc npm run test"
   },
   "author": "Robin L Denton",
