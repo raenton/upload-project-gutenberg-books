@@ -1,5 +1,3 @@
-const mongoose = require('mongoose')
-const bookModel = require('./src/bookModel')
 const path = require('path')
 const fsHandler = require('./src/fsHandler')
 const bookService = require('./src/bookService')
@@ -14,11 +12,6 @@ const booksDir = path.resolve(process.cwd(), 'cache/epub')
 
 async function uploadBooks(rootFolder) {
   try {
-    await mongoose.connect('mongodb://127.0.0.1:8080/default', {
-      useCreateIndex: true,
-      useNewUrlParser: true,
-      useUnifiedTopology: true
-    })
 
     const folderPaths = await fsHandler.readDir(rootFolder)
     const bookPaths = folderPaths
@@ -30,15 +23,8 @@ async function uploadBooks(rootFolder) {
     // incur more promises.
     for (let bookPath of bookPaths) {
       const book = await bookService.readBook(bookPath)
-      const exists = await bookModel.exists({
-        bookId: book.bookId
-      })
-
-      if (!exists) {
-        await bookModel.create(book)
-      }
+      
     }
-    await mongoose.disconnect()
   } catch (err) {
     console.error('Something really bad happened', err)
   }
