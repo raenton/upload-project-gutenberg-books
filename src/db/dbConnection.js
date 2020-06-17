@@ -8,14 +8,14 @@ exports.connect = ({
   password
 }) => {
   return limit > 1
-    ? mysql.createConnection({
+    ? mysql.createPool({
       connectionLimit: limit,
       host,
       port,
       user,
       password
     })
-    : mysql.createPool({
+    : mysql.createConnection({
       host,
       port,
       user,
