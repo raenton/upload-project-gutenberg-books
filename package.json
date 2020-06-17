@@ -3,10 +3,10 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon --inspect=1234 index.js",
-    "start": "node index.js",
-    "test": "mocha ./test/**/*.test.js",
-    "test:watch": "mocha -w ./test/**/*.test.js",
+    "dev": "NODE_ENV=development nodemon --inspect=1234 index.js",
+    "start": "NODE_ENV=production node index.js",
+    "test": "NODE_ENV=test mocha ./test/**/*.test.js",
+    "test:watch": "NODE_ENV=test mocha -w ./test/**/*.test.js",
     "coverage": "nyc npm run test"
   },
   "author": "Robin L Denton",
