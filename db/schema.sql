@@ -5,11 +5,11 @@ USE test;
 
 CREATE TABLE books (
 	id INTEGER PRIMARY KEY AUTO_INCREMENT,
-	title VARCHAR(255),
+	title TEXT,
     copyright VARCHAR(255),
     license VARCHAR(255),
     publication_date DATE,
-    INDEX title_index (title),
+    INDEX title_index (title(255)),
     INDEX pub_date_index (publication_date)
 );
 
@@ -24,7 +24,7 @@ CREATE TABLE subjects (
 );
 
 CREATE TABLE languages (
-	code CHAR(2) PRIMARY KEY
+	code CHAR(5) PRIMARY KEY
 );
 
 -- relations
@@ -47,7 +47,7 @@ CREATE TABLE books_subjects(
 
 CREATE TABLE books_languages(
 	bookId INTEGER NOT NULL,
-	languageCode CHAR(2) NOT NULL,
+	languageCode CHAR(5) NOT NULL,
     FOREIGN KEY (bookId) REFERENCES books(id),
     FOREIGN KEY (languageCode) REFERENCES languages(code),
     UNIQUE (bookId, languageCode)
