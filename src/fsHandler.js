@@ -1,5 +1,8 @@
 const fs = require('fs')
+const gracefulFs = require('graceful-fs')
 const util = require('util')
+
+gracefulFs.gracefulify(fs)
 
 /**
  * at the moment this module just promisifies native fs module
