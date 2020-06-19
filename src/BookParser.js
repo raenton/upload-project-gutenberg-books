@@ -1,23 +1,26 @@
-class BookProcessor {
+const { EventEmitter } = require('events')
+
+const BookParserEvents = {
+  PARSED_BATCH: 'PARSED_BATCH'
+}
+
+class BookParser extends EventEmitter {
   constructor({
-    bookService,
     fsHandler,
     rdfHandler,
     utils
   }) {
-    this.bookService = bookService
+    super()
     this.fsHandler = fsHandler
     this.rdfHandler = rdfHandler
     this.utils = utils
   }
 
-  processBooks(bookPaths) {
-    return Promise.all(bookPaths.map(this.processBook.bind(this)))
-  }
-
-  async processBook(bookPath) {
-    const parsed = await this._parseBook(bookPath)
-    await this.bookService.create(parsed)
+  parseBooks(bookPaths) {
+    return Promise.all(bookPaths.map(this._parseBook.bind(this)))
+      .then(books => {
+        this.emit(BookParserEvents.PARSED_BATCH, books)
+      })
   }
 
   async _parseBook(bookPath) {
@@ -73,4 +76,7 @@ class BookProcessor {
   }
 }
 
-module.exports = BookProcessor
+module.exports = {
+  BookParser,
+  BookParserEvents
+}
