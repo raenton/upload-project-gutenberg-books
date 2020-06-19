@@ -14,7 +14,6 @@ CREATE TABLE books (
 );
 
 CREATE TABLE authors (
-	id INTEGER PRIMARY KEY AUTO_INCREMENT,
 	name VARCHAR(255) NOT NULL UNIQUE,
     INDEX name_index (name)
 );
@@ -31,10 +30,10 @@ CREATE TABLE languages (
 
 CREATE TABLE books_authors(
 	bookId INTEGER NOT NULL,
-    authorId INTEGER NOT NULL,
+    authorName VARCHAR(255) NOT NULL,
     FOREIGN KEY (bookId) REFERENCES books(id),
-    FOREIGN KEY (authorId) REFERENCES authors(id),
-    UNIQUE (bookId, authorId)
+    FOREIGN KEY (authorName) REFERENCES authors(name),
+    UNIQUE (bookId, authorName)
 );
 
 CREATE TABLE books_subjects(
