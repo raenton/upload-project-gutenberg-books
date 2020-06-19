@@ -9,12 +9,12 @@ module.exports = function(sequelize, DataTypes) {
       },
       primaryKey: true
     },
-    authorId: {
-      type: DataTypes.INTEGER,
+    authorName: {
+      type: DataTypes.STRING(255),
       allowNull: false,
       references: {
         model: 'authors',
-        key: 'id'
+        key: 'name'
       },
       primaryKey: true
     }
