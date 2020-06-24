@@ -1,43 +1,29 @@
-# Metadata Tech Test (Bibliu)
+# Upload Project Gutenberg books
 
-Please see `TASK.md` for the task requirements.
+Download this and unzip: [Project Gutenberg Books Metadata](http://www.gutenberg.org/cache/epub/feeds/rdf-files.tar.zip)
 
-## Personal Comment
-
-Due to time limitations, there was only so far I could go with this. There is
-admittedly a lot that could be done to improve things. The data for one, would be
-better suited to a relational database. Authors and Subjects and so on should be separated
-into their own tables, rather than having a lot of repeated data in the documents. I chose to use mongo because of familiarity and quick setup, because I could not really afford to spend much more time.
-
-There is not much context for the code either, so it is difficult to consider
-the architectural terms. The code would also take a different shape depending on the
-environment it would end up in, and how the I/O interacted with other services.
+then place the unzipped `cache` folder in the project root. That should look like: `~/${workspaceRoot}/cache/epub/**`
 
 ## Prerequisites
 
 You will need to have Docker, Node and yarn installed on your system.
 
+You will also need to create an env file with the following parameters:
+
+```
+MYSQL_HOST=localhost
+MYSQL_PORT=3306
+MYSQL_DBNAME=test
+MYSQL_USER=root
+MYSQL_PASS=example
+BOOKS_DIRECTORY=cache/epub
+```
+
 ## How to use
-
-You will need to extract the files mentioned in the `TASK.md` description and drag the root unzipped folder into the root of this project.
-
-That should look like: `~/${workspaceRoot}/cache/epub/**`
 
 Launch
 ```
-docker pull mongo:latest
-docker run -d -p 127.0.0.1:8080:27017/tcp  --name bibliu-mongo mongo:latest
-yarn start
-```
-
-Unit tests
-```
-yarn run test
-// OR
-yarn run test:watch
-```
-
-Coverage
-```
-yarn run coverage
+yarn                  // install packages
+docker-compose up -d  // run mysql container
+yarn start            // run in production mode
 ```
