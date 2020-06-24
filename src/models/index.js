@@ -7,5 +7,5 @@ module.exports = (function(sequelize, DataTypes){
     books_authors: require('./books_authors')(sequelize, DataTypes),
     books_languages: require('./books_languages')(sequelize, DataTypes),
     books_subjects: require('./books_subjects')(sequelize, DataTypes)
-  }
-})
+  };
+});

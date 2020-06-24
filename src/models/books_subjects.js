@@ -1,5 +1,5 @@
 module.exports = function(sequelize, DataTypes) {
-  const model = sequelize.define('books_subjects', {
+  return sequelize.define('books_subjects', {
     bookId: {
       type: DataTypes.INTEGER,
       allowNull: false,
@@ -20,7 +20,5 @@ module.exports = function(sequelize, DataTypes) {
     }
   }, {
     tableName: 'books_subjects'
-  })
-
-  return model
-}
+  });
+};

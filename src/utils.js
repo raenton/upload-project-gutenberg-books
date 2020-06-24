@@ -8,15 +8,15 @@
  * @param {string} properties property chain to split by: 'prop1.prop2.prop3'
  */
 exports.deepFlatten = (root, properties) => {
-  const splitProps = properties.split('.')
-  const property = splitProps[0]
+  const splitProps = properties.split('.');
+  const property = splitProps[0];
 
-  const flat = root.reduce((acc, curr) => acc.concat(curr[property] || []), [])
+  const flat = root.reduce((acc, curr) => acc.concat(curr[property] || []), []);
 
-  const nextProps = splitProps.slice(1)
+  const nextProps = splitProps.slice(1);
 
   if (nextProps.length > 0) {
-    return this.deepFlatten(flat, nextProps.join('.'))
+    return this.deepFlatten(flat, nextProps.join('.'));
   }
-  return flat
-}
+  return flat;
+};
